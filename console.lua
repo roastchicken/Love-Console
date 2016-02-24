@@ -24,6 +24,13 @@ function console:draw()
   local bgColor = console.info.bgColor
   love.graphics.setColor( bgColor.r, bgColor.g, bgColor.b )
   love.graphics.rectangle( "fill", console.info.xPos, console.info.yPos, console.info.xSize, console.info.xSize )
+  
+  love.graphics.setColor( 255, 255, 255 )
+  love.graphics.setFont( console.info.font )
+  
+  for line, text in ipairs( console.lines ) do -- draw the lines
+    love.graphics.print( text, 10, 12 * line )
+  end
 end
 
 return console
