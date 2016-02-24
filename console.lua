@@ -3,7 +3,7 @@ local util = require( "util" )
 local console = {}
 local info
 
-function console:init( xPos, yPos, xSize, ySize, font, bgColor )
+function console:init( xPos, yPos, xSize, ySize, bgColor, font )
   if console.initiated then return end
   
   console.initiated = true
