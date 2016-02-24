@@ -9,6 +9,10 @@ function love.load()
   love.graphics.setBackgroundColor( 102, 102, 102 )
   
   console:init()
+  
+  console:print( "This is the first line." )
+  console:print( "Text wrap test. Text wrap test. Text wrap test. Text wrap test. Text wrap test. Text wrap test. Text wrap test. Text wrap test. Text wrap test. Text wrap test. Text wrap test. Text wrap test. Text wrap test. Text wrap test. Text wrap test." )
+  console:print( "After a wrapped lines, the rest of the lines continue like normal." )
 end
 
 function love.draw()
