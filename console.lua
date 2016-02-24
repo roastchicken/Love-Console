@@ -30,7 +30,7 @@ function console:draw()
   
   local bgColor = console.info.bgColor
   love.graphics.setColor( bgColor.r, bgColor.g, bgColor.b )
-  love.graphics.rectangle( "fill", console.info.xPos, console.info.yPos, console.info.xSize, console.info.xSize )
+  love.graphics.rectangle( "fill", console.info.xPos, console.info.yPos, console.info.xSize, console.info.ySize )
   
   love.graphics.setColor( 255, 255, 255 )
   love.graphics.setFont( console.info.font )
