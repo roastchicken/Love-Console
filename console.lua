@@ -31,6 +31,19 @@ local function refreshLines( offset )
   end
 end
 
+function console:scroll( amount )
+  if not console.initiated then return end
+  local offset = console.info.lineOffset + amount
+  if offset < 1 then
+    offset = 1
+  elseif offset > #console.history - console.info.maxLines then
+    console:scrollToBottom()
+    return
+  end
+  
+  refreshLines( offset )
+end
+
 function console:scrollToBottom()
   if not console.initiated then return end
   local bottomOffset = #console.history - console.info.maxLines + 1
