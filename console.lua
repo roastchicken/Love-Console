@@ -37,6 +37,7 @@ function console:scrollToBottom()
 end
 
 function console:print( text )
+  if not console.initiated then return end
   local width, wrapped = console.info.font:getWrap( text, console.info.xSize - 20 ) -- wrap the text, using the console width - 20 to take the padding into account
   for k, line in ipairs( wrapped ) do
     table.insert( console.history, line )
