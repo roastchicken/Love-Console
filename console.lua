@@ -30,6 +30,7 @@ local function refreshLines( offset )
 end
 
 function console:scrollToBottom()
+  if not console.initiated then return end
   local bottomOffset = #console.history - console.info.maxLines + 1
   if bottomOffset <= 0 then bottomOffset = 1 end
   refreshLines( bottomOffset )
