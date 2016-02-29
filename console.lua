@@ -18,10 +18,12 @@ function console:init( xPos, yPos, xSize, ySize, bgColor, font )
   console.info.bgColor = bgColor or util.Color( 0, 0, 0 )
   console.info.font = font or love.graphics.newFont(12)
   
+  console.info.lineOffset = 1
   console.info.maxLines = math.floor( ( console.info.ySize - 20 ) / 12 )
 end
 
 local function refreshLines( offset )
+  console.info.lineOffset = offset
   console.lines = {}
   for i = offset, offset + console.info.maxLines do
     if not console.history[i] then break end
