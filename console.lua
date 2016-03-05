@@ -46,7 +46,7 @@ end
 
 function console:scrollToBottom()
   if not console.initiated then return end
-  local bottomOffset = #console.history - console.info.maxLines + 1
+  local bottomOffset = #console.history - console.info.maxLines + 1 -- add one in order to show last line
   if bottomOffset <= 0 then bottomOffset = 1 end
   refreshLines( bottomOffset )
 end
