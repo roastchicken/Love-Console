@@ -25,7 +25,7 @@ end
 local function refreshLines( offset )
   console.info.lineOffset = offset
   console.lines = {}
-  for i = offset, offset + console.info.maxLines do
+  for i = offset, offset + console.info.maxLines - 1 do -- subtract one to leave a space of one line at the end
     if not console.history[i] then break end
     table.insert( console.lines, console.history[i] )
   end
