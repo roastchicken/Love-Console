@@ -1,7 +1,9 @@
-local util = require( "util" )
-
 local console = {}
 local info
+
+function Color( red, green, blue )
+  return { r = red, g = green, b = blue }
+end
 
 function console:init( xPos, yPos, xSize, ySize, bgColor, font )
   if console.initiated then return end
@@ -15,7 +17,7 @@ function console:init( xPos, yPos, xSize, ySize, bgColor, font )
   console.info.yPos = yPos or 0
   console.info.xSize = xSize or love.graphics.getWidth()
   console.info.ySize = ySize or love.graphics.getHeight()
-  console.info.bgColor = bgColor or util.Color( 0, 0, 0 )
+  console.info.bgColor = bgColor or Color( 0, 0, 0 )
   console.info.font = font or love.graphics.newFont(12)
   
   console.info.lineOffset = 1
