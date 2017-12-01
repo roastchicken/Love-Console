@@ -87,7 +87,7 @@ function console:draw()
   love.graphics.setFont( console.info.font )
   
   for line, text in ipairs( console.lines ) do -- draw the lines
-    love.graphics.print( text, 10, 12 * ( line - 1 ) + 10 )
+    love.graphics.print( text, console.info.xPos + 10, console.info.yPos + 12 * ( line - 1 ) + 10 )
   end
 end
 
