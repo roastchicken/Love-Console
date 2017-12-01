@@ -24,8 +24,12 @@ function console:init( xPos, yPos, xSize, ySize, bgColor, font )
   console.info.maxLines = math.floor( ( console.info.ySize - 20 ) / 12 )
 end
 
-local function refreshLines( offset )
-  console.info.lineOffset = offset
+local function getOffset()
+  return console.info.lineOffset
+end
+
+local function refreshLines()
+  local offset = getOffset()
   console.lines = {}
   for i = offset, offset + console.info.maxLines - 1 do -- subtract one to leave a space of one line at the end
     if not console.history[i] then break end
@@ -33,24 +37,29 @@ local function refreshLines( offset )
   end
 end
 
-function console:scroll( amount )
-  if not console.initiated then return end
-  local offset = console.info.lineOffset + amount
-  if offset < 1 then
-    offset = 1
-  elseif offset > #console.history - console.info.maxLines then
-    console:scrollToBottom()
-    return
+local function setOffset( offset )
+  if offset > #console.history - console.info.maxLines then
+    offset = #console.history - console.info.maxLines + 1 -- add one in order to show last line
   end
   
-  refreshLines( offset )
+  if offset < 1 then
+    offset = 1
+  end
+  
+  console.info.lineOffset = offset
+  refreshLines()
+end
+
+function console:scroll( amount )
+  if not console.initiated then return end
+  setOffset( getOffset() + amount )
 end
 
 function console:scrollToBottom()
   if not console.initiated then return end
   local bottomOffset = #console.history - console.info.maxLines + 1 -- add one in order to show last line
   if bottomOffset <= 0 then bottomOffset = 1 end
-  refreshLines( bottomOffset )
+  setOffset( bottomOffset )
 end
 
 function console:print( text )
