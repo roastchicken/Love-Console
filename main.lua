@@ -12,7 +12,7 @@ function love.load()
   
   console:print( "This is the first line." )
   console:print( "Text wrap test. Text wrap test. Text wrap test. Text wrap test. Text wrap test. Text wrap test. Text wrap test. Text wrap test. Text wrap test. Text wrap test. Text wrap test. Text wrap test. Text wrap test. Text wrap test. Text wrap test." )
-  console:print( "After a wrapped lines, the rest of the lines continue like normal." )
+  console:print( "After a wrapped line, the rest of the lines continue like normal." )
 end
 
 function love.draw()
