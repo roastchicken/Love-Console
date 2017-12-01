@@ -20,7 +20,8 @@ function console:init( xPos, yPos, xSize, ySize, bgColor, font )
   console.info.bgColor = bgColor or Color( 0, 0, 0 )
   console.info.font = font or love.graphics.newFont(12)
   
-  console.info.lineOffset = 1
+  -- the number of lines the bottom displayed line is offset from the latest printed line
+  console.info.lineOffset = 0
   console.info.maxLines = math.floor( ( console.info.ySize - 20 ) / 12 )
 end
 
@@ -31,19 +32,25 @@ end
 local function refreshLines()
   local offset = getOffset()
   console.lines = {}
-  for i = offset, offset + console.info.maxLines - 1 do -- subtract one to leave a space of one line at the end
-    if not console.history[i] then break end
+  
+  -- add 1 because otherwise maxLines + 1 are placed into lines
+  local firstLine = #console.history - console.info.maxLines - offset + 1
+  if firstLine < 1 then
+    firstLine = 1
+  end
+  
+  for i = firstLine, #console.history - offset do
     table.insert( console.lines, console.history[i] )
   end
 end
 
 local function setOffset( offset )
   if offset > #console.history - console.info.maxLines then
-    offset = #console.history - console.info.maxLines + 1 -- add one in order to show last line
+    offset = #console.history - console.info.maxLines
   end
   
-  if offset < 1 then
-    offset = 1
+  if offset < 0 then
+    offset = 0
   end
   
   console.info.lineOffset = offset
@@ -57,9 +64,7 @@ end
 
 function console:scrollToBottom()
   if not console.initiated then return end
-  local bottomOffset = #console.history - console.info.maxLines + 1 -- add one in order to show last line
-  if bottomOffset <= 0 then bottomOffset = 1 end
-  setOffset( bottomOffset )
+  setOffset( 0 )
 end
 
 function console:print( text )
